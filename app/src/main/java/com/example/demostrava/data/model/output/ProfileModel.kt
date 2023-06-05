@@ -1,0 +1,40 @@
+package com.example.demostrava.data.model.output
+
+import com.google.gson.annotations.SerializedName
+
+data class ProfileModel (
+    @SerializedName("id"                     ) var id                    : Int?              = null,
+    @SerializedName("username"               ) var username              : String?           = null,
+    @SerializedName("resource_state"         ) var resourceState         : Int?              = null,
+    @SerializedName("firstname"              ) var firstname             : String?           = null,
+    @SerializedName("lastname"               ) var lastname              : String?           = null,
+    @SerializedName("bio"                    ) var bio                   : String?           = null,
+    @SerializedName("city"                   ) var city                  : String?           = null,
+    @SerializedName("state"                  ) var state                 : String?           = null,
+    @SerializedName("country"                ) var country               : String?           = null,
+    @SerializedName("sex"                    ) var sex                   : String?           = null,
+    @SerializedName("premium"                ) var premium               : Boolean?          = null,
+    @SerializedName("summit"                 ) var summit                : Boolean?          = null,
+    @SerializedName("created_at"             ) var createdAt             : String?           = null,
+    @SerializedName("updated_at"             ) var updatedAt             : String?           = null,
+    @SerializedName("badge_type_id"          ) var badgeTypeId           : Int?              = null,
+    @SerializedName("weight"                 ) var weight                : Int?              = null,
+    @SerializedName("profile_medium"         ) var profileMedium         : String?           = null,
+    @SerializedName("profile"                ) var profile               : String?           = null,
+    @SerializedName("friend"                 ) var friend                : String?           = null,
+    @SerializedName("follower"               ) var follower              : String?           = null,
+    @SerializedName("blocked"                ) var blocked               : Boolean?          = null,
+    @SerializedName("can_follow"             ) var canFollow             : Boolean?          = null,
+    @SerializedName("follower_count"         ) var followerCount         : Int?              = null,
+    @SerializedName("friend_count"           ) var friendCount           : Int?              = null,
+    @SerializedName("mutual_friend_count"    ) var mutualFriendCount     : Int?              = null,
+    @SerializedName("athlete_type"           ) var athleteType           : Int?              = null,
+    @SerializedName("date_preference"        ) var datePreference        : String?           = null,
+    @SerializedName("measurement_preference" ) var measurementPreference : String?           = null,
+    @SerializedName("clubs"                  ) var clubs                 : ArrayList<String> = arrayListOf(),
+    @SerializedName("ftp"                    ) var ftp                   : String?           = null,
+    @SerializedName("bikes"                  ) var bikes                 : ArrayList<String> = arrayListOf(),
+    @SerializedName("shoes"                  ) var shoes                 : ArrayList<String> = arrayListOf(),
+    @SerializedName("is_winback_via_upload"  ) var isWinbackViaUpload    : Boolean?          = null,
+    @SerializedName("is_winback_via_view"    ) var isWinbackViaView      : Boolean?          = null
+)
