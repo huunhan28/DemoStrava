@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Demo Login Strava</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiaHV1bmhhbjI4MDgiLCJhIjoiY2xqZ3hoMngzMGFhaDNycWk5Nmg3M2h3OSJ9.-cusghGKfKTTqpRXMoniAg</string>
 </resources>
