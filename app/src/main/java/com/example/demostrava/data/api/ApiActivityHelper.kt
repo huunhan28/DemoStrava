@@ -1,10 +1,16 @@
 package com.example.demostrava.data.api
 
+import android.content.Context
+import com.example.demostrava.data.model.input.InputDetailActivity
 import com.example.demostrava.data.model.input.InputListAthleteActivity
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.UUID
+import java.util.concurrent.TimeUnit
 
 class ApiActivityHelper(accessToken: String) {
 
@@ -14,9 +20,12 @@ class ApiActivityHelper(accessToken: String) {
         val newRequest: Request = chain.request().newBuilder()
             .addHeader("accept", "application/json")
             .addHeader("Authorization", "Bearer $accessToken")
+
             .build()
         chain.proceed(newRequest)
-    }.build()
+    }
+        .addInterceptor(ErrorInterceptor()).
+    build()
 
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
@@ -27,8 +36,12 @@ class ApiActivityHelper(accessToken: String) {
     }
 
 
-
     val apiService: ApiService = getRetrofit().create(ApiService::class.java)
+
+    suspend fun getDetailActivity(input: InputDetailActivity)
+            = apiService.getDetailActivity(
+        input.id
+    )
 
     suspend fun getListAthleteActivity(input: InputListAthleteActivity)
     = apiService.getListAthleteActivity(
@@ -38,5 +51,29 @@ class ApiActivityHelper(accessToken: String) {
 
     suspend fun getProfile()
             = apiService.getProfile()
+
+
+
+}
+
+class ErrorInterceptor() : Interceptor {
+
+    override fun intercept(chain: Interceptor.Chain): Response {
+
+        val request: Request = chain.request()
+        val uuid = UUID.randomUUID().toString()
+        val response = chain.proceed(request)
+
+        try {
+            when(response.code){
+                200 ->{
+                    //END
+                }
+            }
+        } catch (_ : Exception){
+
+        }
+        return response
+    }
 
 }

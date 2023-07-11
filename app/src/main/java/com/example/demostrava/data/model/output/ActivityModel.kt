@@ -1,5 +1,6 @@
 package com.example.demostrava.data.model.output
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class ActivityModel(
@@ -11,7 +12,7 @@ data class ActivityModel(
     @SerializedName("name")
     var name: String? = null,
     @SerializedName("distance")
-    var distance: Double? = null
+    var distance: Double? = null,
 //    @SerializedName("moving_time")
 //    var movingTime: Int? = null,
 //    @SerializedName("elapsed_time")
@@ -54,7 +55,7 @@ data class ActivityModel(
 //    @SerializedName("comment_count") var commentCount: Int? = null,
 //    @SerializedName("athlete_count") var athleteCount: Int? = null,
 //    @SerializedName("photo_count") var photoCount: Int? = null,
-//    @SerializedName("map") var map: Map? = Map(),
+    @SerializedName("map") var map: Map? = Map(),
 //    @SerializedName("trainer") var trainer: Boolean? = null,
 //    @SerializedName("commute") var commute: Boolean? = null,
 //    @SerializedName("manual") var manual: Boolean? = null,
@@ -91,6 +92,7 @@ data class Map(
 
     @SerializedName("id") var id: String? = null,
     @SerializedName("summary_polyline") var summaryPolyline: String? = null,
+    @SerializedName("polyline") var polyline: String? = null,
     @SerializedName("resource_state") var resourceState: Int? = null
 
 )

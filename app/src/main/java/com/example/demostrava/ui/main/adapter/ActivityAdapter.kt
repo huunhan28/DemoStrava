@@ -1,5 +1,6 @@
 package com.example.demostrava.ui.main.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,10 +16,18 @@ import com.example.demostrava.ui.main.adapter.ActivityAdapter.DataViewHolder
 import com.example.demostrava.ui.main.view.DetailActivityActivity
 import com.example.demostrava.ui.main.view.LoginActivity
 
-class ActivityAdapter(private val users: ArrayList<ActivityModel>) : RecyclerView.Adapter<DataViewHolder>() {
+class ActivityAdapter() : RecyclerView.Adapter<DataViewHolder>() {
 
+    lateinit var mContext: Context
+    lateinit var actionToParent: CallToAction
+    lateinit var users: ArrayList<ActivityModel>
+    constructor(context: Context,users: ArrayList<ActivityModel>, action: CallToAction) : this() {
+        this.mContext = context
+        this.users = users
+        this.actionToParent = action
+    }
 
-    class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private lateinit var textViewUserName: TextView
         private lateinit var textViewUserEmail: TextView
         private lateinit var rootItem: View
@@ -33,8 +42,10 @@ class ActivityAdapter(private val users: ArrayList<ActivityModel>) : RecyclerVie
 //                    .into(imageViewAvatar)
                 rootItem = findViewById(R.id.rootItem)
                 rootItem.setOnClickListener {
-                    var intent = Intent(context, DetailActivityActivity::class.java)
-                    startActivity(context,intent, Bundle())
+                    var bundle = Bundle()
+                    bundle.putString("summaryPolyline",activityModel.map?.summaryPolyline)
+                    bundle.putString("name",activityModel.name)
+                    actionToParent.action(bundle)
                 }
             }
         }

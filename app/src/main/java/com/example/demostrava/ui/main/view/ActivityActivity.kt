@@ -1,5 +1,6 @@
 package com.example.demostrava.ui.main.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.demostrava.ui.main.viewmodel.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -20,6 +22,7 @@ import com.example.demostrava.data.model.input.InputListAthleteActivity
 import com.example.demostrava.data.model.output.ActivityModel
 import com.example.demostrava.ui.base.ViewModelActivityFactory
 import com.example.demostrava.ui.main.adapter.ActivityAdapter
+import com.example.demostrava.ui.main.adapter.CallToAction
 import com.example.demostrava.ui.main.viewmodel.ActivityViewModel
 import com.example.demostrava.utils.Status.ERROR
 import com.example.demostrava.utils.Status.LOADING
@@ -73,7 +76,19 @@ class ActivityActivity : AppCompatActivity() {
 
     private fun setupUI() {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ActivityAdapter(arrayListOf())
+        adapter = ActivityAdapter(
+            this@ActivityActivity,
+            arrayListOf(),
+            object : CallToAction {
+                override fun action(bundle: Bundle?) {
+                    var intent = Intent(this@ActivityActivity,DetailActivityActivity::class.java)
+                    intent.putExtra("summaryPolyline",bundle?.getString("summaryPolyline"))
+                    intent.putExtra("name",bundle?.getString("name"))
+                    intent.putExtra("accessToken", accessToken)
+                    startActivity(intent)
+                }
+            }
+        )
         recyclerView.addItemDecoration(
             DividerItemDecoration(
                 recyclerView.context,

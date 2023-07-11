@@ -8,6 +8,12 @@ import retrofit2.http.*
 
 interface ApiService {
 
+    @GET("activities/{id}")
+    suspend fun getDetailActivity(
+        @Path("id") id: Long,
+        @Query("include_all_efforts") include_all_efforts: Boolean = true
+    ): ActivityModel
+
     @GET("athlete/activities")
     suspend fun getListAthleteActivity(
         @Query("page") page: Int,
