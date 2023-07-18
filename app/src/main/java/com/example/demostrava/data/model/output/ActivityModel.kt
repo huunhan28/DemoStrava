@@ -25,8 +25,8 @@ data class ActivityModel(
 //    var sportType: String? = null,
 //    @SerializedName("workout_type")
 //    var workoutType: String? = null,
-//    @SerializedName("id")
-//    var id: Int? = null,
+    @SerializedName("id")
+    var id: Long? = null,
 //    @SerializedName("external_id")
 //    var externalId: String? = null,
 //    @SerializedName("upload_id")

@@ -38,6 +38,9 @@ class ApiActivityHelper(accessToken: String) {
 
     val apiService: ApiService = getRetrofit().create(ApiService::class.java)
 
+    suspend fun getStreamsActivity(id: Long)
+            = apiService.getStreamsActivity(id)
+
     suspend fun getDetailActivity(input: InputDetailActivity)
             = apiService.getDetailActivity(
         input.id

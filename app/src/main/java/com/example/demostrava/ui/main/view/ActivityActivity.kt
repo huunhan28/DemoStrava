@@ -85,6 +85,7 @@ class ActivityActivity : AppCompatActivity() {
                     intent.putExtra("summaryPolyline",bundle?.getString("summaryPolyline"))
                     intent.putExtra("name",bundle?.getString("name"))
                     intent.putExtra("accessToken", accessToken)
+                    intent.putExtra("idActivity", bundle?.getString("idActivity"))
                     startActivity(intent)
                 }
             }
@@ -118,7 +119,7 @@ class ActivityActivity : AppCompatActivity() {
                     ERROR -> {
                         recyclerView.visibility = View.VISIBLE
                         progressBar.visibility = View.GONE
-                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, it.message + "list activity", Toast.LENGTH_LONG).show()
                     }
                     LOADING -> {
                         progressBar.visibility = View.VISIBLE
@@ -144,7 +145,7 @@ class ActivityActivity : AppCompatActivity() {
                         }
                     }
                     ERROR -> {
-                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, it.message + "profile", Toast.LENGTH_LONG).show()
                     }
                     LOADING -> {
                     }

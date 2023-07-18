@@ -3,6 +3,7 @@ package com.example.demostrava.ui.main.adapter
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,9 +43,11 @@ class ActivityAdapter() : RecyclerView.Adapter<DataViewHolder>() {
 //                    .into(imageViewAvatar)
                 rootItem = findViewById(R.id.rootItem)
                 rootItem.setOnClickListener {
+                    Log.d("idActivity", activityModel.id.toString())
                     var bundle = Bundle()
                     bundle.putString("summaryPolyline",activityModel.map?.summaryPolyline)
                     bundle.putString("name",activityModel.name)
+                    bundle.putString("idActivity",activityModel.id.toString())
                     actionToParent.action(bundle)
                 }
             }

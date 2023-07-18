@@ -35,19 +35,57 @@
         app:layout_constraintStart_toEndOf="@id/icBack"
         app:layout_constraintTop_toTopOf="@id/icBack"
         app:layout_constraintBottom_toBottomOf="@id/icBack"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="32dp"
         />
+    <TextView
+        android:id="@+id/txtType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/icBack"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        android:text="Run"
+        android:layout_marginTop="48dp"
+        />
+
+    <TextView
+        android:id="@+id/txtDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/icBack"
+        app:layout_constraintTop_toBottomOf="@id/txtType"
+        android:text="Distance"
+        android:layout_marginTop="32dp"
+        />
+
+    <TextView
+        android:id="@+id/txtTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/icBack"
+        app:layout_constraintTop_toBottomOf="@id/txtDistance"
+        android:text="Time"
+        android:layout_marginTop="16dp"
+        />
+
+    <TextView
+        android:id="@+id/txtViewMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/icBack"
+        app:layout_constraintTop_toBottomOf="@id/txtTime"
+        android:text="View more..."
+        android:layout_marginTop="16dp"
+        />
+
     <com.mapbox.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="0dp"
         android:layout_height="200dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewMore"
         android:layout_marginTop="24dp"
         mapbox:mapbox_cameraZoom="9.0"
-        mapbox:mapbox_cameraTargetLat="40.7128"
-        mapbox:mapbox_cameraTargetLng="-74.0060"
         />
     <TextView
         android:id="@+id/titleActivity"

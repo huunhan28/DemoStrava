@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
                 .appendQueryParameter("response_type", "code")
                 .appendQueryParameter("approval_prompt", "auto")
 //                .appendQueryParameter("scope", "activity:write,read")
-                .appendQueryParameter("scope", "activity:read_all,profile:read_all")
+                .appendQueryParameter("scope", "activity:read_all")
                 .build()
 
             val intent = Intent(Intent.ACTION_VIEW, intentUri)
@@ -67,10 +67,11 @@ class LoginActivity : AppCompatActivity() {
                             var intent = Intent(this, ActivityActivity::class.java)
                             intent.putExtra("accessToken", output.access_token)
                             startActivity(intent)
+                            finish()
                         }
                     }
                     Status.ERROR -> {
-                        Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, it.message + "get access token", Toast.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {
                     }

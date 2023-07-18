@@ -4,9 +4,16 @@ import com.example.demostrava.data.model.input.InputGetAccessToken
 import com.example.demostrava.data.model.output.ActivityModel
 import com.example.demostrava.data.model.output.OutputGetAccessToken
 import com.example.demostrava.data.model.output.ProfileModel
+import com.example.demostrava.data.model.output.StreamModel
 import retrofit2.http.*
 
 interface ApiService {
+
+//    @GET("activities/9143250963/streams?keys=latlng&key_by_type=true")
+    @GET("activities/{id}/streams?keys=latlng&key_by_type=true")
+    suspend fun getStreamsActivity(
+        @Path("id") id: Long,
+    ): StreamModel
 
     @GET("activities/{id}")
     suspend fun getDetailActivity(
