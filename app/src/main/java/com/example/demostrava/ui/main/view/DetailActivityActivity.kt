@@ -127,7 +127,6 @@ class DetailActivityActivity : AppCompatActivity() {
     private fun setControls(){
         mapView = findViewById(R.id.mapView)
         btnBack = findViewById(R.id.btnBack)
-        titleActivity = findViewById(R.id.titleActivity)
     }
 
     private fun initListeners(){
@@ -143,8 +142,6 @@ class DetailActivityActivity : AppCompatActivity() {
             accessToken = it.getString("accessToken").toString()
             idActivity = it.getString("idActivity").toString().toLong()
         }
-
-        titleActivity.text = name
     }
 
     private fun initMapbox(dataOrigin : ArrayList<ArrayList<Double>> = arrayListOf()){

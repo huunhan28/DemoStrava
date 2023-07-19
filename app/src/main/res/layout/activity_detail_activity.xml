@@ -44,6 +44,7 @@
         app:layout_constraintStart_toStartOf="@id/icBack"
         app:layout_constraintTop_toBottomOf="@id/title"
         android:text="Run"
+        android:textSize="20sp"
         android:layout_marginTop="48dp"
         />
 
@@ -56,7 +57,16 @@
         android:text="Distance"
         android:layout_marginTop="32dp"
         />
-
+    <TextView
+        android:id="@+id/txtDistanceValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/txtDistance"
+        app:layout_constraintTop_toTopOf="@id/txtDistance"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="5.47km"
+        android:layout_marginEnd="16dp"
+        />
     <TextView
         android:id="@+id/txtTime"
         android:layout_width="wrap_content"
@@ -67,6 +77,16 @@
         android:layout_marginTop="16dp"
         />
 
+    <TextView
+        android:id="@+id/txtTimeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/txtTime"
+        app:layout_constraintTop_toTopOf="@id/txtTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="0h 35m 20s"
+        android:layout_marginEnd="16dp"
+        />
     <TextView
         android:id="@+id/txtViewMore"
         android:layout_width="wrap_content"
@@ -87,13 +107,5 @@
         android:layout_marginTop="24dp"
         mapbox:mapbox_cameraZoom="9.0"
         />
-    <TextView
-        android:id="@+id/titleActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/icBack"
-        app:layout_constraintTop_toBottomOf="@id/mapView"
-        android:layout_marginTop="16dp"
-        tools:text="title"
-        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
