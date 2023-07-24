@@ -1,5 +1,7 @@
 package com.example.demostrava.ui.main.view
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -38,11 +40,18 @@ class DetailActivityActivity : AppCompatActivity() {
     var mapView: MapView? = null
     lateinit var btnBack: View
     lateinit var titleActivity: TextView
+    lateinit var txtDistanceValue: TextView
+    lateinit var txtTimeValue: TextView
+    lateinit var btnOpenStrava: TextView
     var summaryPolyline = ""
     var name = ""
+    var movingTime = ""
+    var distance = ""
     var idActivity = 0L
     private lateinit var viewModel: ActivityViewModel
     private lateinit var polylineAnnotationManager: PolylineAnnotationManager
+//    var stravaDeepLinkUrl = "strava://athletes/"
+    var stravaDeepLinkUrl = "https://www.strava.com/activities/"
 
     private var formatJsonFirst ="""{
   "type": "FeatureCollection",
@@ -121,17 +130,24 @@ class DetailActivityActivity : AppCompatActivity() {
         setupViewModel()
 //        setupObserversDetailActivity()
         setupObserversStreamsActivity(idActivity)
+        setupObserversDetailActivity(idActivity)
 
     }
 
     private fun setControls(){
         mapView = findViewById(R.id.mapView)
         btnBack = findViewById(R.id.btnBack)
+        txtDistanceValue = findViewById(R.id.txtDistanceValue)
+        txtTimeValue = findViewById(R.id.txtTimeValue)
+        btnOpenStrava = findViewById(R.id.btnOpenStrava)
     }
 
     private fun initListeners(){
         btnBack.setOnClickListener {
             onBackPressed()
+        }
+        btnOpenStrava.setOnClickListener {
+            openStrava()
         }
     }
 
@@ -141,7 +157,12 @@ class DetailActivityActivity : AppCompatActivity() {
             name = it.getString("name").toString()
             accessToken = it.getString("accessToken").toString()
             idActivity = it.getString("idActivity").toString().toLong()
+            movingTime = it.getString("movingTime").toString()
+            distance = it.getString("distance").toString()
         }
+
+        txtDistanceValue.text = distance
+        txtTimeValue.text = movingTime
     }
 
     private fun initMapbox(dataOrigin : ArrayList<ArrayList<Double>> = arrayListOf()){
@@ -245,7 +266,44 @@ class DetailActivityActivity : AppCompatActivity() {
             }
         })
     }
+    private fun setupObserversDetailActivity(id: Long){
+        viewModel.getDetailActivity(id).observe(this, Observer {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        resource.data?.let { data ->
+                            Log.d("okhttp",data.toString())
+//                            stravaDeepLinkUrl = data.highlightedKudosers[0]?.destinationUrl.toString()
+                        }
+                    }
+                    Status.ERROR -> {
 
+                        Toast.makeText(this, it.message + "detail", Toast.LENGTH_LONG).show()
+                        Log.d("okhttp",it.toString())
+                    }
+                    Status.LOADING -> {
+
+                    }
+                }
+            }
+        })
+    }
+    private fun openStrava() {
+
+        val stravaWebsiteUrl = "https://www.strava.com/"+idActivity
+
+        val intent = Intent(Intent.ACTION_VIEW)
+
+        // Try to open the Strava app using deep link
+        intent.data = Uri.parse(stravaDeepLinkUrl+idActivity)
+
+        // If Strava app not installed, fallback to the Strava website
+//        if (intent.resolveActivity(packageManager) == null) {
+//            intent.data = Uri.parse(stravaWebsiteUrl)
+//        }
+
+        startActivity(intent)
+    }
     private fun setupObserversDetailActivity(){
 //        var input = InputDetailActivity()
 ////        input.before = 0

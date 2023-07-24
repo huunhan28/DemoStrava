@@ -7,7 +7,7 @@ import com.example.demostrava.data.model.input.InputListAthleteActivity
 class ActivityRepository(private val apiActivityHelper: ApiActivityHelper) {
 
     suspend fun getStreamsActivity(id: Long) = apiActivityHelper.getStreamsActivity(id)
-    suspend fun getDetailActivity(input: InputDetailActivity) = apiActivityHelper.getDetailActivity(input)
+    suspend fun getDetailActivity(id: Long) = apiActivityHelper.getDetailActivity(id)
 
     suspend fun getListAthleteActivity(input: InputListAthleteActivity) = apiActivityHelper.getListAthleteActivity(input)
 

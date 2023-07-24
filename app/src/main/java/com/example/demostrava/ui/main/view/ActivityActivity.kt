@@ -27,6 +27,8 @@ import com.example.demostrava.ui.main.viewmodel.ActivityViewModel
 import com.example.demostrava.utils.Status.ERROR
 import com.example.demostrava.utils.Status.LOADING
 import com.example.demostrava.utils.Status.SUCCESS
+import com.mapbox.maps.extension.style.expressions.dsl.generated.distance
+import kotlin.math.roundToInt
 
 class ActivityActivity : AppCompatActivity() {
 
@@ -37,6 +39,7 @@ class ActivityActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var tvProfile: TextView
+    private lateinit var tvTotalDistanceValue: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +58,7 @@ class ActivityActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         btnProfile = findViewById(R.id.btnProfile)
         progressBar = findViewById(R.id.progressBar)
+        tvTotalDistanceValue = findViewById(R.id.tvTotalDistanceValue)
     }
 
     private fun initBtnProfile(){
@@ -86,6 +90,9 @@ class ActivityActivity : AppCompatActivity() {
                     intent.putExtra("name",bundle?.getString("name"))
                     intent.putExtra("accessToken", accessToken)
                     intent.putExtra("idActivity", bundle?.getString("idActivity"))
+                    intent.putExtra("movingTime", bundle?.getString("movingTime"))
+                    intent.putExtra("distance", bundle?.getString("distance"))
+
                     startActivity(intent)
                 }
             }
@@ -100,6 +107,7 @@ class ActivityActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun setupObserversListActivity() {
         var input = InputListAthleteActivity()
 //        input.before = 0
@@ -112,9 +120,17 @@ class ActivityActivity : AppCompatActivity() {
                     SUCCESS -> {
                         recyclerView.visibility = View.VISIBLE
                         progressBar.visibility = View.GONE
+                        var totalDistance = 0
                         resource.data?.let { list ->
                             retrieveList(list)
+                            list.forEach { activityModel ->
+                                activityModel.distance?.let { distance ->
+                                    totalDistance += distance.roundToInt()
+                                }
+                            }
                         }
+
+                        tvTotalDistanceValue.text = "Total distance: "+(totalDistance/1000).toString() + "." + (totalDistance-(totalDistance/1000)*1000).toString() + "km"
                     }
                     ERROR -> {
                         recyclerView.visibility = View.VISIBLE

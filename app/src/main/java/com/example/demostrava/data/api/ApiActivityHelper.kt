@@ -41,10 +41,8 @@ class ApiActivityHelper(accessToken: String) {
     suspend fun getStreamsActivity(id: Long)
             = apiService.getStreamsActivity(id)
 
-    suspend fun getDetailActivity(input: InputDetailActivity)
-            = apiService.getDetailActivity(
-        input.id
-    )
+    suspend fun getDetailActivity(id: Long)
+            = apiService.getDetailActivity(id)
 
     suspend fun getListAthleteActivity(input: InputListAthleteActivity)
     = apiService.getListAthleteActivity(

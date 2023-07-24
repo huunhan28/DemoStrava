@@ -15,10 +15,9 @@ interface ApiService {
         @Path("id") id: Long,
     ): StreamModel
 
-    @GET("activities/{id}")
+    @GET("activities/{id}?include_all_efforts=true")
     suspend fun getDetailActivity(
-        @Path("id") id: Long,
-        @Query("include_all_efforts") include_all_efforts: Boolean = true
+        @Path("id") id: Long
     ): ActivityModel
 
     @GET("athlete/activities")

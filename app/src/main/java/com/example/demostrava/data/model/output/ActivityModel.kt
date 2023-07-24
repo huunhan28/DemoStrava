@@ -13,8 +13,8 @@ data class ActivityModel(
     var name: String? = null,
     @SerializedName("distance")
     var distance: Double? = null,
-//    @SerializedName("moving_time")
-//    var movingTime: Int? = null,
+    @SerializedName("moving_time")
+    var movingTime: Int? = null,
 //    @SerializedName("elapsed_time")
 //    var elapsedTime: Int? = null,
 //    @SerializedName("total_elevation_gain")
@@ -78,7 +78,7 @@ data class ActivityModel(
 //    @SerializedName("total_photo_count") var totalPhotoCount: Int? = null,
 //    @SerializedName("has_kudoed") var hasKudoed: Boolean? = null,
 //    @SerializedName("suffer_score") var sufferScore: Int? = null
-
+    @SerializedName("highlighted_kudosers") var highlightedKudosers : ArrayList<HighlightedKudosers> = arrayListOf(),
 )
 
 data class Athlete(
@@ -94,5 +94,14 @@ data class Map(
     @SerializedName("summary_polyline") var summaryPolyline: String? = null,
     @SerializedName("polyline") var polyline: String? = null,
     @SerializedName("resource_state") var resourceState: Int? = null
+
+)
+
+data class HighlightedKudosers (
+
+    @SerializedName("destination_url" ) var destinationUrl : String?  = null,
+    @SerializedName("display_name"    ) var displayName    : String?  = null,
+    @SerializedName("avatar_url"      ) var avatarUrl      : String?  = null,
+    @SerializedName("show_name"       ) var showName       : Boolean? = null
 
 )
